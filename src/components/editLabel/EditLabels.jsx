@@ -1,0 +1,42 @@
+import React from "react";
+
+import { useContext } from "react"; // all notes are in usecontext
+import { Box, Grid } from "@mui/material";
+import { styled } from "@mui/material/styles";
+
+// components
+
+import EditLabel from "./EditLabel";
+
+
+import { DataContext } from "../../Context/DataProvider"; // values will come from DataContext from DataProvider folder
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  // display: "flex",
+  // alignItems: "center",
+  // justifyContent: "flex-end",
+  // padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+}));
+
+const EditLabels = ({note}) => {
+  const { editLabels } = useContext(DataContext);
+
+  return (
+    <Box sx={{ display: "flex" }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+          <Grid container style={{ marginTop: 10 }}>
+            {editLabels.map((note) => (
+              <Grid>
+                <EditLabel note={note} />
+              </Grid>
+            ))
+            }
+          </Grid>
+      </Box>
+    </Box>
+  );
+};
+
+export default EditLabels;
